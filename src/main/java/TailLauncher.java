@@ -49,9 +49,7 @@ public class TailLauncher {
 
 
     public static void main(String[] args) {
-        //List<String> res = new TailLauncher().launch(args);
-        //System.out.println(res);
-        List<String> res = new TailLauncher().launch("-o","output/output.txt","input/file1.txt");
+        List<String> res = new TailLauncher().launch(args);
         if (res.size() > 1) {
             for (String line : res){
                 System.out.println(line);
