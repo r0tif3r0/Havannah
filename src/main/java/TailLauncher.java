@@ -49,7 +49,7 @@ public class TailLauncher {
 
 
     public static void main(String[] args) {
-        List<String> res = new TailLauncher().launch("-o","output/output.txt", "input/file1.txt", "input/file0.txt");
+        List<String> res = new TailLauncher().launch(args);
         System.out.println(res);
     }
 
