@@ -36,27 +36,21 @@ import java.util.List;
 
 public class TailLauncher {
     @Option(name = "-c", forbids = {"-n"})
-    private Integer num1;
+    private Integer chNum;
 
     @Option(name = "-n", forbids = {"-c"})
-    private Integer num2;
+    private Integer strNum;
 
     @Option(name = "-o", metaVar = "ofile")
     private File outputFile;
 
     @Argument(metaVar = "file/files")
-    private String inputFiles;
+    private List<File> inputFiles;
 
 
     public static void main(String[] args) {
-        //List<String> res = new TailLauncher().launch(args);
-        //System.out.println(res);
-        List<String> res = new TailLauncher().launch("-o","output/output.txt","input/file1.txt");
-        if (res.size() > 1) {
-            for (String line : res){
-                System.out.println(line);
-            }
-        } else System.out.println(res);
+        List<String> res = new TailLauncher().launch("-o","output/output.txt", "input/file1.txt", "input/file0.txt");
+        System.out.println(res);
     }
 
     public List<String> launch(String... args) {
@@ -71,7 +65,7 @@ public class TailLauncher {
             return Collections.singletonList("SYNTAX ERROR");
         }
 
-        Tail tail = new Tail(num1,num2,outputFile,inputFiles);
+        Tail tail = new Tail(chNum, strNum,outputFile,inputFiles);
         try {
             return tail.main();
         } catch (IOException e) {

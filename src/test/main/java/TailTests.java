@@ -20,7 +20,7 @@ public class TailTests {
 
     @Test //1 argument
     public void test1(){
-        assertEquals(Arrays.asList("file1.txt","acb abc abc acb abc abc","acb abc","acb abc abc abc",
+        assertEquals(Arrays.asList("acb abc abc acb abc abc","acb abc","acb abc abc abc",
                 "acb abc abc acb abc abc acb abc abc", "abc", "abc acb abc abc acb abc abc",
                 "acb abc abc", "acb abc abc", "acb abc abc acb abc abc",
                 "acb abc abc acb abc abc acb abc abc acb abc abc"),new TailLauncher().launch("input/file1.txt"));
@@ -34,19 +34,18 @@ public class TailTests {
                 "acb abc abc acb abc abc acb abc abc acb abc abc", "file0.txt",
                 "xyz xyz xyz", "xyz xyz xyz xyz xyz xyz", "xyz xyz xyz",
                 "xyz xyz xyz xyz", "xyz", "xyz", "xyz xyz"),
-                new TailLauncher().launch("input/file1.txt input/file0.txt"));
+                new TailLauncher().launch("input/file1.txt", "input/file0.txt"));
     }
 
     @Test //flag -c
     public void test3(){
-        assertEquals(Arrays.asList("file1.txt","acb abc abc", "acb abc abc", "acb abc abc acb abc abc",
-                "acb abc abc acb abc abc acb abc abc acb abc abc"),
-                new TailLauncher().launch("-c","4","input/file1.txt"));
+        assertEquals(Collections.singletonList("abc acb abc abc"),
+                new TailLauncher().launch("-c","15","input/file1.txt"));
     }
 
     @Test //flag -n
     public void test4(){
-        assertEquals(Arrays.asList( "file0.txt","xyz xyz xyz",
+        assertEquals(Arrays.asList("xyz xyz xyz",
                 "xyz xyz xyz xyz", "xyz", "xyz", "xyz xyz"),
                 new TailLauncher().launch("-n","5","input/file0.txt"));
     }
@@ -72,6 +71,6 @@ public class TailTests {
     @Test //non-existent output file
     public void test8(){
         assertEquals(Collections.singletonList("ERROR"),
-                new TailLauncher().launch("-o","FILE1/output.txt", "input/file1.txt"));
+                new TailLauncher().launch("-o","FILE777/output.txt", "input/file1.txt"));
     }
 }
