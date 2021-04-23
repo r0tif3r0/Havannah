@@ -29,19 +29,34 @@ public class Tail {
             if (input != null)
                 return output(getTailLines());
             else {
+                String s;
                 Scanner in = new Scanner(System.in);
-                String content = in.nextLine();
-                return output(Collections.singletonList(content));
+                List<String> content = new ArrayList<>();
+                while ((s = in.nextLine()) != null)
+                    content.add(s);
+                List<String> tail = new ArrayList<>();
+                if (content.size() - tailNum > 0){
+                    for (int i = content.size()-tailNum;i<tailNum;i++)
+                        tail.add(content.get(i));
+                } else {
+                    tail.addAll(content);
+                }
+                return tail;
             }
         else {
             if (input != null)
                 return output(getTailChars());
             else {
+                String s;
                 Scanner in = new Scanner(System.in);
-                String content = in.nextLine();
+                StringBuilder content = new StringBuilder();
+                while ((s = in.nextLine()) != null)
+                    content.append(s);
+                List<String> tail = new ArrayList<>();
                 if (content.length() - tailNum > 0)
-                    return output(Collections.singletonList(content.substring(content.length() - tailNum)));
-                else return output(Collections.singletonList(content));
+                    tail.add(content.substring(content.length() - tailNum));
+                else tail.add(content.toString());
+                return tail;
             }
         }
     }
