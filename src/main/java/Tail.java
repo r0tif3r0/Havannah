@@ -34,6 +34,7 @@ public class Tail {
                 List<String> content = new ArrayList<>();
                 while ((s = in.nextLine()) != null)
                     content.add(s);
+                in.close();
                 List<String> tail = new ArrayList<>();
                 if (content.size() - tailNum > 0){
                     for (int i = content.size()-tailNum;i<tailNum;i++)
@@ -52,6 +53,7 @@ public class Tail {
                 StringBuilder content = new StringBuilder();
                 while ((s = in.nextLine()) != null)
                     content.append(s);
+                in.close();
                 List<String> tail = new ArrayList<>();
                 if (content.length() - tailNum > 0)
                     tail.add(content.substring(content.length() - tailNum));
