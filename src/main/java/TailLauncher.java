@@ -50,7 +50,6 @@ public class TailLauncher {
 
     public static void main(String[] args) {
         List<String> res = new TailLauncher().launch(args);
-        System.out.println(res);
     }
 
     public List<String> launch(String... args) {
