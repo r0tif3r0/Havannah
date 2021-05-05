@@ -34,105 +34,91 @@ public class Tail {
 
     public List<String> main() throws IOException {
         if (isTailLines)
-            if (input != null)
-                return output(getTailLines());
-            else {
-                String s = scan();
-                List<String> res = new ArrayList<>();
-                String[] lines = s.split("\n");
-                if (lines.length - tailNum > 0){
-                    res.addAll(Arrays.asList(lines).subList(lines.length - tailNum, lines.length));
-                } else {
-                    res.addAll(Arrays.asList(lines));
-                }
-                return output(res);
-            }
-        else {
-            if (input != null)
-                return output(getTailChars());
-            else {
-                String s = scan();
-                List<String> res = new ArrayList<>();
-                String[] lines = s.split("\n");
-                if (s.length() - (tailNum + lines.length*2) > 0) { // adding num of chars "\n"
-                    int chNum = 0;
-                    int index = 0;
-                    for (int i = lines.length - 1; chNum <= tailNum; i--){
-                        index = i;
-                        chNum += lines[i].trim().length();
-                    }
-                    chNum -= lines[index].trim().length();
-                    if (chNum != tailNum)
-                        res.add(lines[index].substring(lines[index].trim().length() - (tailNum - chNum)));
-                    res.addAll(Arrays.asList(lines).subList(index + 1,lines.length));
-                } else res.add(s);
-                return output(res);
-            }
-        }
+            return output(getTailLines());
+        else return output(getTailChars());
     }
 
     private List<String> output(List<String> getTail) throws IOException {
+        PrintStream ps;
         if (output != null){
-            FileWriter writer = new FileWriter(output);
-            for (String str : getTail){
-                writer.write(str + "\n");
-            }
-            writer.close();
-        } else {
-            for (String str : getTail){
-                System.out.println(str);
-            }
+            ps = new PrintStream(output);
+        } else ps = System.out;
+        for (String str : getTail) {
+            ps.println(str);
         }
         return getTail;
     }
 
     private List<String> getTailChars() throws IOException {
         List<String> tail = new ArrayList<>();
-        for (File file : input) {
-            if (input.size()>1) tail.add(file.getName());
-            Deque<Character> res = new ArrayDeque<>();
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                for (int i = 0; i < tailNum; i++) {
-                    int symbol = reader.read();
-                    if (symbol != -1) {
-                        res.add((char)symbol);
-                    } else break;
-                }
-                int ch;
-                while ((ch = reader.read()) != -1) {
-                    res.removeFirst();
-                    res.add((char)ch);
-                }
+        if (input != null) {
+            for (File file : input) {
+                if (input.size() > 1) tail.add(file.getName());
+                tail.add(lastChars(new Scanner(file)));
             }
-            StringBuilder str = new StringBuilder();
-            for (char ch : res){
-                str.append(ch);
-            }
-            tail.add(str.toString());
-        }
+        } else tail.add(lastChars(new Scanner(System.in)));
         return tail;
+    }
+
+    private String lastChars (Scanner sc){
+        Deque<String> res = new ArrayDeque<>();
+        try (Scanner reader = sc) {
+            reader.useDelimiter("");
+            for (int i = 0; i < tailNum; i++) {
+                if (reader.hasNext()) {
+                    String ch = reader.next();
+                    if (!ch.equals("\r")) {
+                        res.add(ch);
+                        if (ch.equals("\n"))
+                            i--;
+                    }
+                    else i--;
+                } else break;
+            }
+            while (reader.hasNext()) {
+                String ch = reader.next();
+                if (!ch.equals("\r")) {
+                    if (!ch.equals("\n"))
+                        res.removeFirst();
+                    if (res.getFirst().equals("\n"))
+                        res.removeFirst();
+                    res.add(ch);
+                }
+            }
+        }
+        StringBuilder str = new StringBuilder();
+        for (String ch : res){
+            str.append(ch);
+        }
+        return str.toString();
     }
 
     private List<String> getTailLines() throws IOException {
         List<String> tail = new ArrayList<>();
-        for (File file : input) {
-            if (input.size()>1) tail.add(file.getName());
-            Deque<String> res = new ArrayDeque<>();
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                for (int i = 0; i < tailNum; i++) {
-                    String str = reader.readLine();
-                    if (str != null) {
-                        res.add(str);
-                    } else break;
-                }
-                String s;
-                while ((s = reader.readLine()) != null) {
-                    res.removeFirst();
-                    res.add(s);
-                }
-                tail.addAll(res);
+        if (input != null) {
+            for (File file : input) {
+                if (input.size() > 1) tail.add(file.getName());
+                tail.addAll(lastLines(new Scanner(file)));
             }
+        } else {
+            tail.addAll(lastLines(new Scanner(System.in)));
         }
         return tail;
+    }
+
+    private Deque<String> lastLines(Scanner sc){
+        Deque<String> res = new ArrayDeque<>();
+        try (Scanner reader = sc) {
+            for (int i = 0; i < tailNum; i++) {
+                if (reader.hasNextLine()) {
+                    res.add(reader.nextLine());
+                } else break;
+            }
+            while (reader.hasNextLine()) {
+                res.removeFirst();
+                res.add(reader.nextLine());
+            }
+        }
+        return res;
     }
 }
