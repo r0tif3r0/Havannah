@@ -22,20 +22,8 @@ public class Tail {
         input = inputFiles;
     }
 
-    private String scan() throws IOException {
-        StringBuilder res = new StringBuilder();
-        BufferedInputStream in = new BufferedInputStream(System.in);
-        int ch;
-        while ((ch = in.read()) != -1){
-            res.append((char)ch);
-        }
-        return res.toString();
-    }
-
     public List<String> main() throws IOException {
-        if (isTailLines)
-            return output(getTailLines());
-        else return output(getTailChars());
+        return output(getTail());
     }
 
     private List<String> output(List<String> getTail) throws IOException {
@@ -49,76 +37,41 @@ public class Tail {
         return getTail;
     }
 
-    private List<String> getTailChars() throws IOException {
-        List<String> tail = new ArrayList<>();
+    private List<String> getTail() throws IOException {
+        List<String> res = new ArrayList<>();
         if (input != null) {
             for (File file : input) {
-                if (input.size() > 1) tail.add(file.getName());
-                tail.add(lastChars(new Scanner(file)));
+                if (input.size() > 1) res.add(file.getName());
+                res.addAll(tail(new Scanner(file)));
             }
-        } else tail.add(lastChars(new Scanner(System.in)));
-        return tail;
+        } else res.addAll(tail(new Scanner(System.in)));
+        return res;
     }
 
-    private String lastChars (Scanner sc){
+    private Deque<String> tail(Scanner sc) {
         Deque<String> res = new ArrayDeque<>();
         try (Scanner reader = sc) {
-            reader.useDelimiter("");
+            if (isTailLines)
+                reader.useDelimiter("\r\n");
+                else reader.useDelimiter("");
             for (int i = 0; i < tailNum; i++) {
                 if (reader.hasNext()) {
-                    String ch = reader.next();
-                    if (!ch.equals("\r")) {
-                        res.add(ch);
-                        if (ch.equals("\n"))
-                            i--;
-                    }
-                    else i--;
+                    res.add(reader.next());
                 } else break;
             }
-            while (reader.hasNext()) {
-                String ch = reader.next();
-                if (!ch.equals("\r")) {
-                    if (!ch.equals("\n"))
-                        res.removeFirst();
-                    if (res.getFirst().equals("\n"))
-                        res.removeFirst();
-                    res.add(ch);
-                }
-            }
-        }
-        StringBuilder str = new StringBuilder();
-        for (String ch : res){
-            str.append(ch);
-        }
-        return str.toString();
-    }
-
-    private List<String> getTailLines() throws IOException {
-        List<String> tail = new ArrayList<>();
-        if (input != null) {
-            for (File file : input) {
-                if (input.size() > 1) tail.add(file.getName());
-                tail.addAll(lastLines(new Scanner(file)));
-            }
-        } else {
-            tail.addAll(lastLines(new Scanner(System.in)));
-        }
-        return tail;
-    }
-
-    private Deque<String> lastLines(Scanner sc){
-        Deque<String> res = new ArrayDeque<>();
-        try (Scanner reader = sc) {
-            for (int i = 0; i < tailNum; i++) {
-                if (reader.hasNextLine()) {
-                    res.add(reader.nextLine());
-                } else break;
-            }
-            while (reader.hasNextLine()) {
+            while ((reader.hasNext())) {
                 res.removeFirst();
-                res.add(reader.nextLine());
+                res.add((reader.next()));
             }
         }
-        return res;
+        Deque<String> tail = new ArrayDeque<>();
+        if (!isTailLines) {
+            StringBuilder str = new StringBuilder();
+            for (String ch : res){
+                str.append(ch);
+            }
+            tail.add(str.toString());
+        } else tail.addAll(res);
+        return tail;
     }
 }
