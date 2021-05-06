@@ -1,9 +1,16 @@
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 public class Havannah extends Application {
     public static void main(String[] args) {
@@ -11,16 +18,24 @@ public class Havannah extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Line line = new Line (0,0,100,100);
-        line.setStroke(Color.GRAY);
+    public void start(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        URL xmlUrl = getClass().getResource("fxml/mainScene.fxml");
+        loader.setLocation(xmlUrl);
+        Parent root = loader.load();
 
-        Group group = new Group();
-        Scene scene = new Scene(group,400,300);
-        group.getChildren().add(line);
+        stage.setScene(new Scene(root));
 
-        primaryStage.setTitle("HAVANNAH");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        Scene scene = new Scene(root,400,300);
+
+        InputStream iconStream = getClass().getResourceAsStream("images/icon.png");
+        assert iconStream != null;
+        Image image = new Image(iconStream);
+        stage.getIcons().add(image);
+        stage.setTitle("Havannah");
+        stage.setScene(scene);
+
+
+        stage.show();
     }
 }
