@@ -1,0 +1,10 @@
+.background {
+    -fx-background-color: #777;
+    -fx-background-position: center center;
+    -fx-background-repeat: stretch;
+    -fx-min-width: 1000px;
+    -fx-min-height: 900px;
+}
+.button {
+    -fx-background-color: transparent;
+}

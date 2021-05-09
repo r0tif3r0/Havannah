@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1000.0" style="-fx-background-color: #777;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Handling.HelpController">
+   <ImageView fitHeight="177.0" fitWidth="548.0" pickOnBounds="true" preserveRatio="true">
+      <VBox.margin>
+         <Insets bottom="25.0" top="25.0" />
+      </VBox.margin>
+      <Image url="@../images/rules.png" />
+   </ImageView>
+   <TextFlow lineSpacing="5.0" prefHeight="559.0" prefWidth="1000.0">
+      <opaqueInsets>
+         <Insets />
+      </opaqueInsets>
+      <VBox.margin>
+         <Insets left="50.0" right="50.0" />
+      </VBox.margin>
+      <Text fill="#ffd500" strokeType="OUTSIDE" strokeWidth="0.0" text="&#9;►Each player places one chip of their color on the board per turn.&#10;&#9;►Stones are never moved, captured, or otherwise changed.&#10;&#9;►A player wins when they complete one of three different structures from unbroken lines, or paths, of connected stones, all of their colour:&#10;&#9;&#9;•A RING is a loop around one or more cells (no matter whether the encircled cells are occupied by any player or empty);&#10;&#9;&#9;•A BRIDGE, which connects any two of the six corner cells of the board;&#10;&#9;&#9;•A FORK, which connects any three edges of the board; corner points are not considered parts of an edge." wrappingWidth="999.93359375">
+         <font>
+            <Font name="Comic Sans MS" size="26.0" />
+         </font>
+      </Text>
+   </TextFlow>
+   <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" prefHeight="115.0" prefWidth="104.0" style="-fx-background-color: transparent;">
+      <graphic>
+         <ImageView fitHeight="101.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../images/back.png" />
+         </ImageView>
+      </graphic>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+      <VBox.margin>
+         <Insets bottom="25.0" />
+      </VBox.margin>
+   </Button>
+</VBox>
