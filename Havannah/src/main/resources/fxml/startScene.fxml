@@ -2,66 +2,56 @@
 
 <?import javafx.scene.*?>
 <?import javafx.geometry.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="900.0" minWidth="1000.0" prefHeight="900.0"
-            prefWidth="1000.0" styleClass="background" stylesheets="@/css/start.css" xmlns="http://javafx.com/javafx/8"
+            prefWidth="1000.0" style="-fx-background-color: #777" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="Handling.StartController">
    <top>
-      <ImageView fitHeight="243.0" fitWidth="788.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../images/title.png" />
-         </image>
+      <ImageView fitHeight="243.0" fitWidth="788.0" pickOnBounds="true" preserveRatio="true"
+                 BorderPane.alignment="CENTER">
+         <Image url="@../images/title.png"/>
       </ImageView>
    </top>
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="helpButton"  mnemonicParsing="false" prefHeight="135.0" prefWidth="147.0" styleClass="button" onAction="#help">
-               <graphic>
-                  <ImageView  fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/help_icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <HBox.margin>
-                  <Insets bottom="25.0" left="50.0" right="600.0" />
-               </HBox.margin>
-            </Button>
-            <Button alignment="CENTER_RIGHT" mnemonicParsing="false" styleClass="button"
-            onAction="#exit">
-               <graphic>
-                  <ImageView fitHeight="149.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/exit_icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
+         <Button fx:id="helpButton" mnemonicParsing="false" prefHeight="135.0" prefWidth="147.0" style = "-fx-background-color: transparent"
+                 onAction="#help">
+            <graphic>
+               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../images/help_icon.png"/>
+               </ImageView>
+            </graphic>
+            <cursor>
+               <Cursor fx:constant="HAND"/>
+            </cursor>
+            <HBox.margin>
+               <Insets bottom="25.0" left="50.0" right="600.0"/>
+            </HBox.margin>
+         </Button>
+         <Button alignment="CENTER_RIGHT" mnemonicParsing="false" style = "-fx-background-color: transparent"
+                 onAction="#exit">
+            <graphic>
+               <ImageView fitHeight="149.0" fitWidth="133.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../images/exit_icon.png"/>
+               </ImageView>
+            </graphic>
+            <cursor>
+               <Cursor fx:constant="HAND"/>
+            </cursor>
+         </Button>
       </HBox>
    </bottom>
    <center>
       <Button fx:id="startButton" prefHeight="113.0" prefWidth="184.0" textFill="WHITE"
-              BorderPane.alignment="CENTER" styleClass="button"
+              BorderPane.alignment="CENTER" style = "-fx-background-color: transparent"
       onAction="#start">
          <graphic>
             <ImageView fitHeight="151.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/new_game_icon.png" />
-               </image>
+               <Image url="@../images/new_game_icon.png"/>
             </ImageView>
          </graphic>
          <cursor>

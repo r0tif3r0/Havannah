@@ -1,10 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0"
-            prefWidth="1000.0" style="-fx-background-color: #777;" xmlns="http://javafx.com/javafx/11.0.1"
+<BorderPane fx:id="border" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="900.0" prefWidth="1000.0" style="-fx-background-color: #777;" xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="Handling.GameController">
-
+   <center>
+      <Group fx:id="grid" BorderPane.alignment="CENTER">
+         <VBox prefHeight="300.0" prefWidth="400.0">
+            <Label contentDisplay="CENTER" prefHeight="41.0" prefWidth="400.0" text="Choose your grid" textFill="#ffe500">
+               <font>
+                  <Font name="Comic Sans MS" size="36.0" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets left="55.0" />
+               </padding>
+            </Label>
+            <HBox prefHeight="249.0" prefWidth="400.0">
+               <Button mnemonicParsing="false" onMouseClicked="#build8Grid" prefHeight="250.0" prefWidth="200.0"
+                       text="8x8" textFill="#e8d01c">
+                  <HBox.margin>
+                     <Insets top="20.0" />
+                  </HBox.margin>
+                  <font>
+                     <Font name="Comic Sans MS" size="36.0" />
+                  </font>
+               </Button>
+               <Button disable="true" mnemonicParsing="false" prefHeight="250.0" prefWidth="200.0" text="10x10 &#10;(coming soon)"
+                       textAlignment="CENTER" textFill="#e8d01c" wrapText="true">
+                  <HBox.margin>
+                     <Insets top="20.0" />
+                  </HBox.margin>
+                  <font>
+                     <Font name="Comic Sans MS" size="34.0" />
+                  </font>
+               </Button>
+            </HBox>
+         </VBox>
+      </Group>
+   </center>
+   <bottom>
+      <Group>
+         <Label fx:id="redWon" alignment="CENTER" contentDisplay="CENTER" prefHeight="178.0" prefWidth="1000.0"
+                text="RED WON" textFill="#7f0505" visible="false">
+            <font>
+               <Font name="Comic Sans MS" size="72.0"/>
+            </font>
+         </Label>
+         <Label fx:id="draw" alignment="CENTER" prefHeight="177.0" prefWidth="1000.0" text="DRAW" visible="false">
+            <font>
+               <Font name="Comic Sans MS" size="72.0"/>
+            </font>
+         </Label>
+         <Label fx:id="blueWon" alignment="CENTER" prefHeight="179.0" prefWidth="1000.0" text="BLUE WON"
+                textFill="#15057f" visible="false">
+            <font>
+               <Font name="Comic Sans MS" size="72.0"/>
+            </font>
+         </Label>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restart" prefHeight="135.0"
+                    prefWidth="147.0" style="-fx-background-color: transparent;" visible="false">
+               <HBox.margin>
+                  <Insets bottom="25.0" left="50.0" right="600.0"/>
+               </HBox.margin>
+               <graphic>
+                  <ImageView fitHeight="146.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../images/restart.png"/>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND"/>
+               </cursor>
+            </Button>
+            <Button fx:id="menuButton" mnemonicParsing="false" onAction="#menu"
+                    style="-fx-background-color: transparent;" visible="false">
+               <graphic>
+                  <ImageView fitHeight="144.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../images/menu.png"/>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND"/>
+               </cursor>
+            </Button>
+         </HBox>
+      </Group>
+   </bottom>
 </BorderPane>

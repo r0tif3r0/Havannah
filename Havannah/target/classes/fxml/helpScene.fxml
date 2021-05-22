@@ -7,7 +7,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1000.0" style="-fx-background-color: #777;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Handling.HelpController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="900.0" prefWidth="1000.0" style="-fx-background-color: #777;" xmlns="http://javafx.com/javafx/11.0.1"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="Handling.HelpController">
    <ImageView fitHeight="177.0" fitWidth="548.0" pickOnBounds="true" preserveRatio="true">
       <VBox.margin>
          <Insets bottom="25.0" top="25.0" />
@@ -27,7 +29,8 @@
          </font>
       </Text>
    </TextFlow>
-   <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" prefHeight="115.0" prefWidth="104.0" style="-fx-background-color: transparent;">
+   <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" prefHeight="115.0" prefWidth="104.0"
+           style="-fx-background-color: transparent;">
       <graphic>
          <ImageView fitHeight="101.0" fitWidth="95.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../images/back.png" />
