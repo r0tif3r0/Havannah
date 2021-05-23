@@ -155,14 +155,16 @@ public class GameLogic {
                 for (Hexagon hex2 : hexNeighbors.keySet()){
                     GridPosition grid1 = new GridPosition(hex.getQ(), hex.getR());
                     GridPosition grid2 = new GridPosition(hex2.getQ(), hex2.getR());
-                    if (grid1.isAdjacent(grid2) && hexNeighbors.get(hex).size() > 3 && hexNeighbors.get(hex2).size() > 3) {
+                    if (grid1.isAdjacent(grid2) && hexNeighbors.get(hex).size() > 1 && hexNeighbors.get(hex2).size() > 1) {
                         List<Hexagon> retain = new ArrayList<>(hexNeighbors.get(hex2));
                         retain.retainAll(hexNeighbors.get(hex));
                         if (retain.size() == 1) {
-                            hexNeighbors.remove(retain.get(0));
-                            tmpList.remove(retain.get(0));
-                            isChanged = true;
-                            break;
+                            if (hexNeighbors.get(retain.get(0)).size() == 2) {
+                                hexNeighbors.remove(retain.get(0));
+                                tmpList.remove(retain.get(0));
+                                isChanged = true;
+                                break;
+                            }
                         }
                     }
                 }
